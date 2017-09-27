@@ -1,5 +1,7 @@
 <template>
-  <li> {{ data }}  </li>
+  <li>
+    {{ data }}
+  </li>
 </template>
 
 <script>
@@ -7,3 +9,9 @@
     props: ['data']
   }
 </script>
+
+<style lang="stylus" scoped>
+  li
+    color white
+    list-style-type:none
+</style>

@@ -22,6 +22,7 @@ export default {
         name: username
         // avatar
       }
+      this.store.users.push(this.store.user.name)
     }
   }
 }

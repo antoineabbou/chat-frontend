@@ -1,7 +1,7 @@
 <template>
-  <ul>
-    <user v-for="user in users" :data="user"></user>
-  </ul>
+    <ul>
+      <user v-for="user in users" :data="user"></user>
+    </ul>
 </template>
 
 <script>
@@ -14,3 +14,10 @@
     }
   }
 </script>
+
+
+<style lang="stylus" scoped>
+  ul
+    margin 0px
+    padding 0px
+</style>

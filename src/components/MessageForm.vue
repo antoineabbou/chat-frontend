@@ -4,3 +4,8 @@
     <button>Envoyer</button>
   </form>
 </template>
+
+<style lang="stylus" scoped>
+  input
+    width 70%
+</style>
