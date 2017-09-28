@@ -31,6 +31,11 @@ export default {
       store.users = newUserList
     })
 
+    socket.on('user joined', (user) => {
+      console.log(user.clients)
+      store.users = user.clients
+    })
+
     socket.on('new message', (data) => {
       console.log(data)
       store.messages.push({
@@ -45,8 +50,8 @@ export default {
       }
     })
 
-    socket.on('wizz', (user) => {
-      //
+    socket.on('wizz', () => {
+      // user wizzed
     })
 
     Vue.mixin({
