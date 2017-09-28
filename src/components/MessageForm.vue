@@ -1,33 +1,30 @@
 <template>
-  <form>
-    <input @keyup.space ='isTyping' type="text" placeholder="message" v-model="message"/>
-      <div v-if="typing" id="wave">
+  <form @submit.prevent="onSubmit">
+    <input type="text" placeholder="message" v-model="message" />
+      <!-- <div v-if="typing" id="wave">
         <span class="dot"></span>
         <span class="dot"></span>
         <span class="dot"></span>
-      </div>
+      </div> -->
     <button>Envoyer</button>
   </form>
 </template>
+
 <script>
   export default {
     data () {
       return {
-        message: '',
-        typing: false
+        message: ''
       }
     },
-    watch: {
-      message: function (val) {
-        if (val.length > 0) {
-          this.typing = true
-        } else {
-          console.log('No message')
-          this.typing = false
-        }
+    methods: {
+      onSubmit (e) {
+        this.sendMessage(this.message)
+        this.message = ''
       }
     }
   }
+
 </script>
 
 <style scoped>
@@ -36,17 +33,16 @@
   }
   div#wave {
     position: relative;
-    width: 100px;
-    height: 100px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 30px;
+    height: 0px;
+
   }
   div#wave .dot {
     display: inline-block;
-    width: 12px;
-    height: 12px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    margin-right: 3px;
+    margin-right: 1px;
     background: #303131;
     animation: wave 1.3s linear infinite;
   }

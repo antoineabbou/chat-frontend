@@ -27,9 +27,17 @@
         } else {
           this.error = false
           this.$emit('login', this.username)
-          this.$router.push('/')
         }
       }
+    },
+    created () {
+      console.log('test')
+      this.$store.$watch('user', (user) => {
+        if (user.id) {
+          console.log('will push to /')
+          this.$router.push('/')
+        }
+      })
     }
   }
 </script>

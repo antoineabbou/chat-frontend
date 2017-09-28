@@ -1,31 +1,27 @@
 <template>
   <div id="app">
-    <h1 v-if="store.user.name"> Bienvenue {{ store.user.name }} </h1>
-    <router-view :store="store" @login="onLogin"></router-view>
+    <!-- <h1 v-if="store.user.name"> Bienvenue {{ store.user.name }} </h1> -->
+    <router-view :store="$store" @login="onLogin" ></router-view>
   </div>
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      store: {
-        user: {}, // user informations
-        users: ['Franquito', 'Paquito', 'Pepito'], // users list
-        messages: ['Hello', 'Bonjour'] // messages list
+  // import { EventBus } from './main.js'
+  export default {
+    methods: {
+      onLogin (username, avatarUrl) {
+        /* this.$store.user = {
+          name: username,
+          isTyping: false
+        }
+        this.$store.users.push(this.$store.user) */
+        this.connect(username, avatarUrl)
+      },
+      onTyping (typing) {
+        this.$store.user.isTyping = typing
       }
-    }
-  },
-  methods: {
-    onLogin (username) {
-      this.store.user = {
-        name: username
-        // avatar
-      }
-      this.store.users.push(this.store.user.name)
     }
   }
-}
 </script>
 
 <style lang="stylus">
