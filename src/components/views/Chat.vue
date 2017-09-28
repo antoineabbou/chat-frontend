@@ -19,7 +19,7 @@
   import UserList from '../UserList'
   import MessageList from '../MessageList'
   import MessageForm from '../MessageForm'
-
+  
   export default {
     props: ['store'],
     components: {
