@@ -38,9 +38,16 @@ export default {
 
     socket.on('new message', (data) => {
       console.log(data)
+      // var audio = document.createElement('audio')
+      // audio.src = '../../static/audio/test.mp3'
+      // audio.play()
       store.messages.push({
         data
       })
+    })
+
+    socket.on('typing', (user) => {
+      console.log(user, "est en train d'écrire")
     })
 
     socket.on('getUsers', (users) => {

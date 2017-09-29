@@ -18,6 +18,6 @@
 
 <style lang="stylus" scoped>
   ul
-    margin 0px
+    margin auto
     padding 0px
 </style>

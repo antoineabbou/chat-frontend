@@ -2,10 +2,10 @@
   <main>
     <div class="container">
       <div class="top"> </div>
-      <div class="test">
+      <div class="sidebar">
         <user-list :users="store.users"></user-list>
       </div>
-      <div class="main">
+      <div class="chat">
         <message-list :messages="store.messages"></message-list>
         <div class="form-container">
           <message-form></message-form>
@@ -35,23 +35,37 @@
     height 100%
     width:100%
 
-  .test
-    width 25%
+  .sidebar
+    width 15%
     float left
     min-height: 100vh
-    background-color black
-  .main
+    background-color white
+    height 100vh
+    display flex
+    align-items center
+
+  .chat
     float left
-    width 75%
-    position:relative
-    min-height:100vh
+    width 85%
+    position relative
+    min-height 100vh
+    font-family Editor
+    background-color grey
+    overflow-y scroll
+
   .top
     position absolute
     width 100%
     height 60px
+
   .form-container
-    position absolute
+    position fixed
+    background-color white
+    display flex
+    align-items center
+    height 140px
     bottom 0
-    padding-bottom 20px
     width 100%
+
+
 </style>
