@@ -1,5 +1,5 @@
 <template>
-    <ul>
+    <ul class="users">
       <user v-for="user in users" :data="user"></user>
     </ul>
 </template>

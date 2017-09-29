@@ -1,11 +1,14 @@
 <template>
   <form @submit.prevent="onSubmit">
-    <input type="text" placeholder="Votre message..." v-model="message" />
-      <!-- <div v-if="typing" id="wave">
+    <div class="top">
+      <div v-if="$store.typing" id="wave">
         <span class="dot"></span>
         <span class="dot"></span>
         <span class="dot"></span>
-      </div> -->
+      </div>
+      <p v-if="$store.typing"> Quelqu'un est en train d'écrire </p>
+    </div>
+    <input ref="inputMessage" type="text" placeholder="Votre message..." v-model="message" />
     <button><img src="../../static/img/arrow-top.png"/></button>
   </form>
 </template>
@@ -14,15 +17,37 @@
   export default {
     data () {
       return {
-        message: ''
+        message: '',
+        date: new Date().getTime()
       }
     },
     methods: {
       onSubmit (e) {
-        this.sendMessage(this.message)
+        if (this.message.length > 0) {
+          this.sendMessage(this.message)
+        }
         this.message = ''
       }
+    },
+    watch: {
+      message: function () {
+        this.date = new Date().getTime()
+        if (this.$store.typing === false) {
+          this.$store.typing = true
+          this.sendTyping(this.$store.user, true)
+          console.log('Typing')
+        }
+        setTimeout(() => {
+          var date = new Date().getTime()
+          if (date - this.date > 800) {
+            this.$store.typing = false
+            this.sendTyping(this.$store.user, false)
+            console.log('No Typing')
+          }
+        }, 800)
+      }
     }
+
   }
 
 </script>
@@ -34,6 +59,7 @@
     border none!important
     outline none
     padding-left 45px
+    font-family MaisonBold
   form
     position fixed
     display flex!important
@@ -45,6 +71,7 @@
     background none
     border none
     outline none
+    cursor pointer
 
   button:focus
     outline none
@@ -68,17 +95,24 @@
   }
 
   div#wave {
-    position: relative;
-    width: 30px;
-    height: 0px;
-
+    position: relative
+    width: 70px
+    height: 0px
   }
+
+  .top
+    display flex
+    align-items center
+    padding-left 45px
+
+
   div#wave .dot {
+    float:left
     display: inline-block;
-    width: 6px;
-    height: 6px;
+    width: 11px;
+    height: 11px;
     border-radius: 50%;
-    margin-right: 1px;
+    margin-right: 7px;
     background: #303131;
     animation: wave 1.3s linear infinite;
   }
@@ -97,5 +131,7 @@
       transform: translateY(-15px);
     }
   }
+
+
 
 </style>

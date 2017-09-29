@@ -6,7 +6,9 @@ export const store = new Vue({
   data: {
     user: {},
     messages: [],
-    users: []
+    users: [],
+    typing: false,
+    usersTyping: []
   }
 })
 
@@ -38,9 +40,12 @@ export default {
 
     socket.on('new message', (data) => {
       console.log(data)
-      // var audio = document.createElement('audio')
-      // audio.src = '../../static/audio/test.mp3'
-      // audio.play()
+      var sounds = ['../../static/audio/01.mp3', '../../static/audio/02.mp3', '../../static/audio/03.mp3', '../../static/audio/04.mp3', '../../static/audio/05.mp3', '../../static/audio/06.mp3', '../../static/audio/07.mp3', '../../static/audio/08.mp3']
+      var chosenAudio = sounds[Math.floor(Math.random() * sounds.length)]
+      console.log(chosenAudio)
+      var audio = document.createElement('audio')
+      audio.src = chosenAudio
+      audio.play()
       store.messages.push({
         data
       })
@@ -48,6 +53,13 @@ export default {
 
     socket.on('typing', (user) => {
       console.log(user, "est en train d'écrire")
+      store.usersTyping.push({user})
+      store.typing = true
+    })
+
+    socket.on('stop typing', (user) => {
+      console.log(user, "a arrêté d'écrire")
+      store.typing = false
     })
 
     socket.on('getUsers', (users) => {
@@ -71,6 +83,13 @@ export default {
             username,
             avatarUrl
           })
+        },
+        sendTyping (user, isTyping) {
+          if (isTyping === true) {
+            socket.emit('typing', user)
+          } else {
+            socket.emit('stop typing', user)
+          }
         }
       }
     })

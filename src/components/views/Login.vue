@@ -22,7 +22,7 @@
       return {
         error: false,
         username: '',
-        avatarUrl: '../static/img/people.svg'
+        avatarUrl: '../static/img/avatar.svg'
       }
     },
     methods: {
@@ -102,9 +102,11 @@
   h1
     font-size 80px
     margin 0px
+    font-family Editor
   h5
     font-size 18px
     margin 0px
+    font-family Editor
 
   h1
     transition all 0.5s ease

@@ -1,12 +1,9 @@
 <template>
-  <li>
-    {{ data.username }}
-    <div v-if="data.isTyping" id="wave">
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-    </div>
-  </li>
+  <transition name="slideLeft">
+    <li>
+      {{ data.username }}
+    </li>
+  </transition>
 </template>
 
 <script>
@@ -50,4 +47,13 @@
       transform: translateY(-15px);
     }
   }
+
+  .slideLeft-enter-active,
+  .slideLeft-leave-active
+    transition: opacity .5s, transform .5s;
+
+  .slideLeft-enter
+    opacity: 0;
+    transform: translateX(-50px)
+  
 </style>

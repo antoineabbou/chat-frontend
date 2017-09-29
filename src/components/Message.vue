@@ -1,40 +1,29 @@
 <template>
-  <li :class="[customClass]">
-    <div class="dialog">
-      <!-- <div class="face" v-if="this.data.data.author.id !== this.$store.user.id">
-        <img :src=test />
-        <p> flèche </p>
+  <transition name="punchline">
+    <li :class="[customClass]">
+      <div class="dialog">
+          <div v-if="this.data.data.author.id !== this.$store.user.id">
+            <img :src=test />
+          </div>
+          <div v-if="this.data.data.author.id !== this.$store.user.id">
+            <img class="arrow" src="../../static/img/arrow-right.png"/>
+          </div>
+          <p class="date">
+            <span v-if="this.data.data.author.id !== this.$store.user.id"> {{ data.data.author.username }} - </span>
+            {{ formattedTime }}
+          </p>
+          <div class="content">
+            <p :class="[customSize]"> {{ data.data.body }} </p>
+          </div>
+          <div v-if="this.data.data.author.id === this.$store.user.id">
+            <img class="arrow" src="../../static/img/arrow-left.png"/>
+          </div>
+          <div v-if="this.data.data.author.id === this.$store.user.id">
+            <img :src= test />
+          </div>
       </div>
-      <div class="content">
-        <p class="date"> {{ data.data.author.username }} </p>
-        <p :class="[customSize]"> {{ data.data.body }} </p>
-      </div>
-      <div v-if="this.data.data.author.id === this.$store.user.id">
-        <p>  flèche droite </p>
-        <img :src= test />
-      </div> -->
-
-        <div v-if="this.data.data.author.id !== this.$store.user.id">
-          <img :src=test />
-        </div>
-        <div v-if="this.data.data.author.id !== this.$store.user.id">
-          <img class="arrow" src="../../static/img/arrow-right.png"/>
-        </div>
-        <p class="date">
-          <span v-if="this.data.data.author.id !== this.$store.user.id"> {{ data.data.author.username }} - </span>
-          {{ formattedTime }}
-        </p>
-        <div class="content">
-          <p :class="[customSize]"> {{ data.data.body }} </p>
-        </div>
-        <div v-if="this.data.data.author.id === this.$store.user.id">
-          <img class="arrow" src="../../static/img/arrow-left.png"/>
-        </div>
-        <div v-if="this.data.data.author.id === this.$store.user.id">
-          <img :src= test />
-        </div>
-    </div>
-  </li>
+    </li>
+  </transition>
 </template>
 
 <script>
@@ -68,12 +57,8 @@
         }
       },
       convertDate () {
-        console.log(this.data.data.createdAt)
         var timestampFormated = (this.data.data.createdAt)
-        console.log(timestampFormated)
-        // var timestamp = (timestampFormated).slice(0, 9)
         var date = new Date(timestampFormated)
-        console.log(date)
         var hours = date.getHours()
         var minutes = '0' + date.getMinutes()
         this.formattedTime = hours + ':' + minutes.substr(-2)
@@ -98,7 +83,7 @@
 
   @font-face
     font-family MaisonBold
-    src url ('../../static/fonts/MaisonNeue/MaisonNeueBold.otf')
+    src url('../../static/fonts/MaisonNeue/MaisonNeueBold.otf')
 
   .dialog
     display flex
@@ -109,12 +94,19 @@
     position absolute
     top -15%
     text-transform uppercase
+    font-family Maison
 
   .him .date
     left 180px
 
   .me .date
     right 185px
+  .me .content
+    font-family MaisonBold
+
+  .list
+    overflow-y scroll
+    height 100vh
 
   ul
     list-style none;
@@ -129,12 +121,13 @@
     margin-bottom 2px;
     font-family Editor
     min-width 350px
-    max-width 800px
+    max-width 650px
     word-break break-all
     padding-left 0px
+    margin 15px 0px
 
   li:nth-last-child(1)
-    padding-bottom: 180px
+    padding-bottom: 50px
 
   .him
     /* background #eee*/
@@ -169,6 +162,15 @@
 
   .small
     font-size 18px
+
+  .punchline-enter-active,
+  .punchline-leave-active
+    transition: opacity .5s, transform .5s;
+
+  .punchline-enter
+    opacity: 0;
+    transform: translateY(35px)
+
 
 
 </style>

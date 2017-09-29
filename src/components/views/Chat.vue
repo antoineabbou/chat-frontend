@@ -19,7 +19,7 @@
   import UserList from '../UserList'
   import MessageList from '../MessageList'
   import MessageForm from '../MessageForm'
-  
+
   export default {
     props: ['store'],
     components: {
@@ -43,12 +43,18 @@
     height 100vh
     display flex
     align-items center
+    overflow-y scroll
+  ul.users
+    font-family Maison
+    height 100vh
+
 
   .chat
     float left
     width 85%
     position relative
     min-height 100vh
+    height 100vh
     font-family Editor
     background-color grey
     overflow-y scroll
