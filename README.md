@@ -1,6 +1,6 @@
-# chat
+# Front end - Chat
 
-> chat project
+> Creation of a chat with websockets
 
 ## Build Setup
 
