@@ -51,7 +51,7 @@
     "rupture": "^0.6.1",
     "jeet": "^7.0.1",
     "typus": "^0.0.3",
-    "svg-sprite-loader": "0.0.29",
+    "svg-sprite-loader": "6.0.11",
     "url-loader": "^0.5.7",
     "vue-loader": "^9.4.0",
     "vue-style-loader": "^1.0.0",
